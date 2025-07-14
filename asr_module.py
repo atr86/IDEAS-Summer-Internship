@@ -48,6 +48,7 @@ def show_asr_tab():
             url = f"https://drive.google.com/uc?id={file_id1}"
             with st.spinner("whisper-cli not found locally. Downloading from Google Drive..."):
                 gdown.download(url, binary_path, quiet=False)
+                os.chmod("whisper-cli", 0o755)
             st.success("Model downloaded successfully!")
         else:
             print("Model already exists locally.")
