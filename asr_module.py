@@ -100,31 +100,6 @@ def show_asr_tab():
     def set_path():
         # Copy existing env
         env = os.environ.copy()
-
-        # Replace PATH with the working Command Prompt PATH
-        env["PATH"] = (
-            r"C:\mingw64-new\bin;"
-            r"C:\Program Files\Common Files\Oracle\Java\javapath;"
-            r"C:\Program Files (x86)\Common Files\Oracle\Java\java8path;"
-            r"C:\Program Files (x86)\Common Files\Oracle\Java\javapath;"
-            r"C:\Windows\system32;"
-            r"C:\Windows;"
-            r"C:\Windows\System32\Wbem;"
-            r"C:\Windows\System32\WindowsPowerShell\v1.0\;"
-            r"C:\Windows\System32\OpenSSH\;"
-            r"C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;"
-            r"C:\MinGW\bin;"
-            r"C:\Program Files\Git\cmd;"
-            r"C:\Program Files\BlueJ\jdk\bin;"
-            r"E:\Python\bin;"
-            r"C:\Program Files\CMake\bin;"
-            r"C:\Users\abc\AppData\Local\Programs\Python\Python313\Scripts\;"
-            r"C:\Users\abc\AppData\Local\Programs\Python\Python313\;"
-            r"C:\Users\abc\AppData\Local\Microsoft\WindowsApps;"
-            r"C:\Users\abc\AppData\Local\Programs\Microsoft VS Code\bin;"
-            r"C:\Program Files\JetBrains\PyCharm Community Edition 2023.3.3\bin;"
-            r"C:\Users\abc\AppData\Local\Programs\Ollama;"
-                      )
         return env
 
 
