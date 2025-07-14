@@ -5,10 +5,10 @@ def show_asr_tab():
     import streamlit as st
     import tempfile
     import os
-    from transformers import pipeline
+    #from transformers import pipeline
     import time as time
     import subprocess
-    import torch
+    #import torch
     import os
     
     print(os.environ['PATH'])
