@@ -7,13 +7,13 @@ def show_asr_tab():
     import os
     #from transformers import pipeline
     import time as time
-    import subprocess
+    #import subprocess
     #import torch
-    import os
+    from whisper_cpp_python import Whisper
     
-    print(os.environ['PATH'])
+    #print(os.environ['PATH'])
     #from ai4bharat import run
-
+    
     # def AI4Bharat(audio_path,gguf=False):
     #     text=run(audio_path)
     #     return text
@@ -26,7 +26,7 @@ def show_asr_tab():
     file_id = "1IaH_PPk8e02Imf_Wf6m4WrVsUSGQNu5A"
     url = f"https://drive.google.com/uc?id={file_id}"
     local_model_path = "whisper-large-v3-q8_0.gguf"
-
+    
     
     if not os.path.exists(local_model_path):
         with st.spinner("whisper-large-v3-q8_0.gguf model not found locally. Downloading from Google Drive..."):
@@ -34,48 +34,46 @@ def show_asr_tab():
         st.success("Model downloaded successfully!")
     else:
         print("Model already exists locally.")
-
+    whisper_model = Whisper("whisper-large-v3-q8_0.gguf")
     
     def Whisper_Large_v3(audio_path, gguf=True):
         
         output_prefix = audio_path
         output_file = f"{output_prefix}.txt"
         env = set_path()  # Your function to set PATH
+        result = whisper_model.transcribe(audio_path)
+        return result["text"]
+        
+        # binary_path="whisper-cli"
+        # if not os.path.exists(binary_path):
+        #     file_id1 = "1qS9facmYvpnzI5J_6N5rJ-v3HNtOAhJq"
+        #     url = f"https://drive.google.com/uc?id={file_id1}"
+        #     with st.spinner("whisper-cli not found locally. Downloading from Google Drive..."):
+        #         gdown.download(url, binary_path, quiet=False)
+        #         os.chmod("whisper-cli", 0o755)
+        #     st.success("Model downloaded successfully!")
+        # else:
+        #     print("Model already exists locally.")
 
-        binary_path="whisper-cli"
-        if not os.path.exists(binary_path):
-            file_id1 = "1qS9facmYvpnzI5J_6N5rJ-v3HNtOAhJq"
-            url = f"https://drive.google.com/uc?id={file_id1}"
-            with st.spinner("whisper-cli not found locally. Downloading from Google Drive..."):
-                gdown.download(url, binary_path, quiet=False)
-                os.chmod("whisper-cli", 0o755)
-            st.success("Model downloaded successfully!")
-        else:
-            print("Model already exists locally.")
+        # cmd = [
+        #     "./whisper-cli",#for linux
+        #     "-m", "whisper-large-v3-q8_0.gguf",
+        #     "-f", audio_path,
+        #     "--language", "bn",
+        #     "-otxt",
+        #     "-of", output_prefix
+        # ]
 
+        # result = subprocess.run(cmd, check=True, capture_output=True, text=True, env=env)
+        # print("STDOUT:", result.stdout)
+        # print("STDERR:", result.stderr)
 
+        # if not os.path.exists(output_file):
+        #     raise FileNotFoundError(f"Output file was not created: {output_file}")
 
-
-
-        cmd = [
-            "./whisper-cli",#for linux
-            "-m", "whisper-large-v3-q8_0.gguf",
-            "-f", audio_path,
-            "--language", "bn",
-            "-otxt",
-            "-of", output_prefix
-        ]
-
-        result = subprocess.run(cmd, check=True, capture_output=True, text=True, env=env)
-        print("STDOUT:", result.stdout)
-        print("STDERR:", result.stderr)
-
-        if not os.path.exists(output_file):
-            raise FileNotFoundError(f"Output file was not created: {output_file}")
-
-        with open(output_file, "r", encoding="utf-8") as f:
-            text = f.read()
-        return text
+        # with open(output_file, "r", encoding="utf-8") as f:
+        #     text = f.read()
+        # return text
 
     
 
