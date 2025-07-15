@@ -30,7 +30,7 @@ This project implements an end-to-end **speech-to-answer system**, combining **A
 ###  Installation
 
 ```
-git clone https://github.com/](https://github.com/atr86/IDEAS-Summer-Internship.git
+git clone https://github.com/atr86/IDEAS-Summer-Internship.git
 ```
 
 ---
