@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: my-app
+    env: python
+    buildCommand: |
+      # Remove new cmake first
+      sudo apt-get remove -y cmake
+      sudo apt-get update
+
+      # Install older working cmake version from Kitware
+      sudo apt-get install -y software-properties-common lsb-release
+      sudo apt-get purge --auto-remove cmake
+
+      sudo apt-get install -y wget gpg
+      wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
+      sudo apt-add-repository "deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ $(lsb_release -cs) main"
+      sudo apt-get update
+      sudo apt-get install -y cmake=3.25.*
+
+      # Install Python dependencies
+      pip install -r requirements.txt
+
+    startCommand: streamlit run start.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10
