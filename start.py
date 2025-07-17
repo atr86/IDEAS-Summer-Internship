@@ -1,6 +1,6 @@
 import streamlit as st
-from asr_module import show_asr_tab
-from qa_module import show_qa_tab
+from modules.asr_module import show_asr_tab
+from modules.qa_module import show_qa_tab
 
 st.set_page_config(
         page_icon='',
