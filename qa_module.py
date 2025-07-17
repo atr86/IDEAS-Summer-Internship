@@ -73,11 +73,13 @@ def show_qa_tab():
 
 
     context=st.session_state.text
-    st.text_area(label=f"Your transcribed text is",value=context,height=100)
+    #st.text_area(label=f"Your transcribed text is",value=context,height=100)
+    st.code(context, language="text", height=150)
 
 
     # Your question
     question = st.text_input("Enter your question")
+    st.code(question,language="text",height=65)
 
     if st.button(f"Answer", key=f"btn2{0}"):
     # Perform extractive QA
@@ -85,7 +87,8 @@ def show_qa_tab():
         result = qa(selected_category, selected_model, question,context)
 
         # Print answer
-        st.text_area(f"Answer:",value=result,height=68)
+        #st.text_area(f"Answer:",value=result,height=68)
+        st.code(result, language="text",height=100)
         #st.text_area("More Details:",value=result,height=68)
         #print(type(result)) of  dict type
 

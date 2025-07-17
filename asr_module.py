@@ -9,40 +9,41 @@ def show_asr_tab():
     import time as time
     #import subprocess
     #import torch
-    from whisper_cpp_python import Whisper
+    #from whisper_cpp_python import Whisper
     
     #print(os.environ['PATH'])
-    #from ai4bharat import run
+    from ai4bharat import run
     
-    # def AI4Bharat(audio_path,gguf=False):
-    #     text=run(audio_path)
-    #     return text
+    def AI4Bharat(audio_path,gguf=False):
+        text=run(audio_path)
+        return text
     
-    try:
-        import gdown
-    except ImportError:
-        os.system("pip install gdown")
-        import gdown
-    file_id = "1IaH_PPk8e02Imf_Wf6m4WrVsUSGQNu5A"
-    url = f"https://drive.google.com/uc?id={file_id}"
-    local_model_path = "whisper-large-v3-q8_0.gguf"
+    # try:
+    #     import gdown
+    # except ImportError:
+    #     os.system("pip install gdown")
+    #     import gdown
+    # file_id = "1IaH_PPk8e02Imf_Wf6m4WrVsUSGQNu5A"
+    # url = f"https://drive.google.com/uc?id={file_id}"
+    # local_model_path = "whisper-large-v3-q8_0.gguf"
     
     
-    if not os.path.exists(local_model_path):
-        with st.spinner("whisper-large-v3-q8_0.gguf model not found locally. Downloading from Google Drive..."):
-            gdown.download(url, local_model_path, quiet=False)
-        st.success("Model downloaded successfully!")
-    else:
-        print("Model already exists locally.")
-    whisper_model = Whisper("whisper-large-v3-q8_0.gguf")
+    # if not os.path.exists(local_model_path):
+    #     with st.spinner("whisper-large-v3-q8_0.gguf model not found locally. Downloading from Google Drive..."):
+    #         gdown.download(url, local_model_path, quiet=False)
+    #     st.success("Model downloaded successfully!")
+    # else:
+    #     print("Model already exists locally.")
+    # whisper_model = Whisper("whisper-large-v3-q8_0.gguf")
     
     def Whisper_Large_v3(audio_path, gguf=True):
         
-        output_prefix = audio_path
-        output_file = f"{output_prefix}.txt"
-        env = set_path()  # Your function to set PATH
-        result = whisper_model.transcribe(audio_path)
-        return result["text"]
+        # output_prefix = audio_path
+        # output_file = f"{output_prefix}.txt"
+        # env = set_path()  # Your function to set PATH
+        # result = whisper_model.transcribe(audio_path)
+        # return result["text"]
+        return "Dummy"
         
         # binary_path="whisper-cli"
         # if not os.path.exists(binary_path):
@@ -78,12 +79,10 @@ def show_asr_tab():
     
 
     #Global var
-    hf_options = []
-    hf_labels = {
-       
-    }
+    hf_options = ["ai4bharat/indicwav2vec_v1_bengali"]
+    hf_labels = {"ai4bharat/indicwav2vec_v1_bengali": "IndicWav2Vec - AI4Bharat Bengali"}
     hf_fn = {
-        
+        "ai4bharat/indicwav2vec_v1_bengali": AI4Bharat
     }
 
 
@@ -104,8 +103,8 @@ def show_asr_tab():
 
     def transcription(audio_path, category, model_option):
         if category == "Original HF models":
-            # text=hf_fn[model_option](audio_path)
-            return 'Dummy'
+            text=hf_fn[model_option](audio_path)
+            return text
             # p = pipeline("automatic-speech-recognition", model=model_option)
             # return p(audio_path, return_timestamps=True)["text"]
 

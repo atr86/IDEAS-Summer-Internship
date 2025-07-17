@@ -40,8 +40,8 @@ def getResponse(question,context):
     response= llm.create_chat_completion(
             messages=[
                 {
-                    "role": "system",
-                    "content": "Below is a question in Bengali language and a context in bengali language. Give only the keywords (important nouns or phrases) from the context that directly answer the question. Do not generate full sentences."
+                    "role": "system",#framed in 1 sentence
+                    "content": "Below is a question and a context in bengali language. Frame in a simple sentence most matching keyword from the context that directly answers the question. Do not generate more than 1 keyword or more than 1 sentence."
                 },
                 {
                     "role": "user",
