@@ -7,74 +7,80 @@ def show_asr_tab():
     import os
     #from transformers import pipeline
     import time as time
-    #import subprocess
     #import torch
     #from whisper_cpp_python import Whisper
     
     #print(os.environ['PATH'])
-    from ai4bharat import run
+    
     
     def AI4Bharat(audio_path,gguf=False):
+        from modules.ai4bharat import run
         text=run(audio_path)
         return text
     
-    # try:
-    #     import gdown
-    # except ImportError:
-    #     os.system("pip install gdown")
-    #     import gdown
-    # file_id = "1IaH_PPk8e02Imf_Wf6m4WrVsUSGQNu5A"
-    # url = f"https://drive.google.com/uc?id={file_id}"
-    # local_model_path = "whisper-large-v3-q8_0.gguf"
+    try:
+        import gdown
+    except ImportError:
+        os.system("pip install gdown")
+        import gdown
+    file_id = "1IaH_PPk8e02Imf_Wf6m4WrVsUSGQNu5A"
+    url = f"https://drive.google.com/uc?id={file_id}"
+    local_model_path = "whisper-large-v3-q8_0.gguf"
     
     
-    # if not os.path.exists(local_model_path):
-    #     with st.spinner("whisper-large-v3-q8_0.gguf model not found locally. Downloading from Google Drive..."):
-    #         gdown.download(url, local_model_path, quiet=False)
-    #     st.success("Model downloaded successfully!")
-    # else:
-    #     print("Model already exists locally.")
-    # whisper_model = Whisper("whisper-large-v3-q8_0.gguf")
+    if not os.path.exists(local_model_path):
+        with st.spinner("whisper-large-v3-q8_0.gguf model not found locally. Downloading from Google Drive..."):
+            gdown.download(url, local_model_path, quiet=False)
+        st.success("Model downloaded successfully!")
+    else:
+        print("Model already exists locally.")
+    
     
     def Whisper_Large_v3(audio_path, gguf=True):
-        
-        # output_prefix = audio_path
-        # output_file = f"{output_prefix}.txt"
-        # env = set_path()  # Your function to set PATH
+
+        # whisper_model = Whisper("whisper-large-v3-q8_0.gguf")
         # result = whisper_model.transcribe(audio_path)
         # return result["text"]
-        return "Dummy"
-        
-        # binary_path="whisper-cli"
-        # if not os.path.exists(binary_path):
-        #     file_id1 = "1qS9facmYvpnzI5J_6N5rJ-v3HNtOAhJq"
-        #     url = f"https://drive.google.com/uc?id={file_id1}"
-        #     with st.spinner("whisper-cli not found locally. Downloading from Google Drive..."):
-        #         gdown.download(url, binary_path, quiet=False)
-        #         os.chmod("whisper-cli", 0o755)
-        #     st.success("Model downloaded successfully!")
-        # else:
-        #     print("Model already exists locally.")
+        # return "Dummy" ---this is method 1--- using whisper_cpp_python
 
-        # cmd = [
-        #     "./whisper-cli",#for linux
-        #     "-m", "whisper-large-v3-q8_0.gguf",
-        #     "-f", audio_path,
-        #     "--language", "bn",
-        #     "-otxt",
-        #     "-of", output_prefix
-        # ]
+        output_prefix = audio_path
+        output_file = f"{output_prefix}.txt"
+        env = set_path()  # Your function to set PATH
 
-        # result = subprocess.run(cmd, check=True, capture_output=True, text=True, env=env)
-        # print("STDOUT:", result.stdout)
-        # print("STDERR:", result.stderr)
 
-        # if not os.path.exists(output_file):
-        #     raise FileNotFoundError(f"Output file was not created: {output_file}")
+        import subprocess
+        # Method 2: Using whisper-cli
+        # Check if whisper-cli binary exists, if not download it
+        binary_path="whisper-cli.exe"
+        if not os.path.exists(binary_path):
+            file_id1 = "1qS9facmYvpnzI5J_6N5rJ-v3HNtOAhJq"
+            url = f"https://drive.google.com/uc?id={file_id1}"
+            with st.spinner("whisper-cli not found locally. Downloading from Google Drive..."):
+                gdown.download(url, binary_path, quiet=False)
+                os.chmod("whisper-cli.exe", 0o755)
+            st.success("whisper-cli downloaded successfully!")
+        else:
+            print("Model already exists locally.")
 
-        # with open(output_file, "r", encoding="utf-8") as f:
-        #     text = f.read()
-        # return text
+        cmd = [
+            "whisper-cli.exe",#for windows
+            "-m", "whisper-large-v3-q8_0.gguf",
+            "-f", audio_path,
+            "--language", "bn",
+            "-otxt",
+            "-of", output_prefix
+        ]
+
+        result = subprocess.run(cmd, check=True, capture_output=True, text=True, env=env)
+        print("STDOUT:", result.stdout)
+        print("STDERR:", result.stderr)
+
+        if not os.path.exists(output_file):
+            raise FileNotFoundError(f"Output file was not created: {output_file}")
+
+        with open(output_file, "r", encoding="utf-8") as f:
+            text = f.read()
+        return text
 
     
 
@@ -88,7 +94,7 @@ def show_asr_tab():
 
     gguf_options=["whisper-large-v3-q8_0"]
     gguf_labels = {
-    "whisper-large-v3-q8_0": "Whisper - Large V3 Q8_0"
+    "whisper-large-v3-q8_0": "Whisper-large-V3-Q8_0"
     }
     gguf_fn = {
         "whisper-large-v3-q8_0": Whisper_Large_v3
@@ -98,6 +104,32 @@ def show_asr_tab():
     def set_path():
         # Copy existing env
         env = os.environ.copy()
+
+        # Replace PATH with the working Command Prompt PATH
+        env["PATH"] = (
+            r"C:\mingw64-new\bin;"
+            r"C:\Program Files\Common Files\Oracle\Java\javapath;"
+            r"C:\Program Files (x86)\Common Files\Oracle\Java\java8path;"
+            r"C:\Program Files (x86)\Common Files\Oracle\Java\javapath;"
+            r"C:\Windows\system32;"
+            r"C:\Windows;"
+            r"C:\Windows\System32\Wbem;"
+            r"C:\Windows\System32\WindowsPowerShell\v1.0\;"
+            r"C:\Windows\System32\OpenSSH\;"
+            r"C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;"
+            r"C:\MinGW\bin;"
+            r"C:\Program Files\Git\cmd;"
+            r"C:\Program Files\BlueJ\jdk\bin;"
+            r"E:\Python\bin;"
+            r"C:\Program Files\CMake\bin;"
+            r"C:\Users\abc\AppData\Local\Programs\Python\Python313\Scripts\;"
+            r"C:\Users\abc\AppData\Local\Programs\Python\Python313\;"
+            r"C:\Users\abc\AppData\Local\Microsoft\WindowsApps;"
+            r"C:\Users\abc\AppData\Local\Programs\Microsoft VS Code\bin;"
+            r"C:\Program Files\JetBrains\PyCharm Community Edition 2023.3.3\bin;"
+            r"C:\Users\abc\AppData\Local\Programs\Ollama;"
+                      )
+        return env
         return env
 
 

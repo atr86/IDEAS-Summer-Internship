@@ -3,3 +3,4 @@ llama-cpp-python>=0.2.30
 gdown>=5.1.0
 ninja
 whisper-cpp-python
+llama-cpp-python
