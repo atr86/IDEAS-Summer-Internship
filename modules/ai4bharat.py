@@ -37,24 +37,20 @@ def transcribe(audio_path, processor, model):
     transcription = processor.batch_decode(predicted_ids)[0]
     return transcription
 
-# Example usage
-if __name__ == "__main__":
-            import_pkg()
-    #for i in range(1, 7):
-            audio_file = f"{7}.wav"  # Replace with your audio file path
+# # Example usage
+# if __name__ == "__main__":
+#             import_pkg()
+#     #for i in range(1, 7):
+#             audio_file = f"{7}.wav"  # Replace with your audio file path
 
-            processor, model = load_stt_model()
-            text = transcribe(audio_file, processor, model)
-            print("Transcription:", text)
-            file_name = f"{audio_file}Ai4bharat.txt"
-            with open(file_name, "w", encoding="utf-8") as f:
-                f.write(text)
-            print(f"Transcription saved to {file_name}")
-            # Note: Ensure you have the required audio file in the same directory or provide the correct path.
-            # Make sure to install the required packages:
-            # pip install torch transformers librosa
-            # If you encounter issues with torch, you may need to install a specific version compatible with your system.
-            # For example, use `pip install torch>=2.6.0` if you have CUDA support.
+#             processor, model = load_stt_model()
+#             text = transcribe(audio_file, processor, model)
+#             print("Transcription:", text)
+#             file_name = f"{audio_file}Ai4bharat.txt"
+#             with open(file_name, "w", encoding="utf-8") as f:
+#                 f.write(text)
+#             print(f"Transcription saved to {file_name}")
+
 
 def run(audio_path):
      import_pkg()
