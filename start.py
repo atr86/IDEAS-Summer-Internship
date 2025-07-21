@@ -1,6 +1,8 @@
+import transformers
 import streamlit as st
 from asr_module import show_asr_tab
 from qa_module import show_qa_tab
+from transformers import pipeline
 
 st.set_page_config(
         page_icon='',
