@@ -128,4 +128,4 @@ You can evaluate model performance using provided evaluation notebooks in Evalua
 
 ---
 
-## This project is done as part of Summer Internship at IDEAS, ISI TIH, Kolkata, by Sayan Dutta([GitHub profile](https://github.com/Sayan-Dutta-2003)) and Myself([GitHub profile](https://github.com/atr86))
+## This project is done as part of Summer Internship at IDEAS, ISI TIH, Kolkata, by [Sayan Dutta](https://github.com/Sayan-Dutta-2003) and [Atrij Roy](https://github.com/atr86)(Me).
