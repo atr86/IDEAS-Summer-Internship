@@ -34,11 +34,12 @@ IDEAS-Summer-Internship/
 
 ## Features
 
-* ASR (Speech-to-Text) using Whisper / Indic-ASR (AI4Bharat)
-* QA Module with support for extractive (BanglaBERT) and generative models (Mistral)
-* Evaluation metrics like WER, CER, EM, F1 for both ASR and QA
-* Modular and extensible: easy to plug and swap models
-* Optional Streamlit-based interface for demo
+* For Bengali
+* ASR Module (Speech-to-Text) using Whisper / Indic-ASR (AI4Bharat)
+* QA module with support using BanglaBERT / Mistral / BanglaLlama
+* Tested with evaluation metrics like WER, CER, EM, F1 for ASR and QA
+* Modular and extensible: easy to plug, swap and add models
+* Streamlit-based interface 
 
 ---
 
