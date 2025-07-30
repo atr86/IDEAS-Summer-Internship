@@ -15,7 +15,7 @@ IDEAS-Summer-Internship/
 |   ├── _pycache_
 │   ├── ai4bharat.py
 |   ├── nous_Mistral.py
-|   ├── bangla_llama,py
+|   ├── bangla_llama.py
 |   ├── bangla_bert_qa.py
 |   ├── asr_module.py                  
 │   └── qa_module.py           
